@@ -48,12 +48,13 @@
         .btn:hover { background: #134b61; }
         .btn:disabled { background: #ccc; cursor: not-allowed; }
         .btn-secondary { background: #6c757d; margin-top: 10px; }
+        .btn-warning { background: var(--accent); color: var(--primary); margin-top: 10px; }
         .btn-print { background: var(--accent); color: var(--primary); margin-top: 1rem; width: auto; }
         .btn-sm { padding: 5px 10px; font-size: 0.8rem; width: auto; }
         .btn-danger-sm { background: var(--danger); color: white; border: none; cursor: pointer; }
         .btn-success-sm { background: var(--success); color: white; border: none; cursor: pointer; }
         
-        .link-btn { background: none; border: none; color: var(--secondary); cursor: pointer; text-decoration: underline; margin-top: 10px; font-size: 0.9rem; }
+        .link-btn { background: none; border: none; color: var(--secondary); cursor: pointer; text-decoration: underline; margin-top: 10px; font-size: 0.9rem; display: inline-block; width: 100%; text-align: center; }
 
         /* Dynamic Member Inputs */
         .member-input-group { background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; border-radius: var(--radius); margin-bottom: 15px; }
@@ -82,7 +83,6 @@
         .school-name { font-weight: 800; color: var(--primary); text-transform: uppercase; font-size: 0.8rem; }
         .team-count { font-size: 0.75rem; color: #777; background: #eee; padding: 2px 6px; border-radius: 4px; }
         .team-actions { display: flex; gap: 5px; margin-left: 10px; }
-        .team.dragging { opacity: 0.5; border: 1px dashed var(--primary); }
 
         /* --- Toast --- */
         #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
@@ -101,6 +101,7 @@
         /* Admin Pusat Styles */
         .filter-group { margin-bottom: 1rem; display: flex; gap: 10px; align-items: center; }
         .badge { background: var(--accent); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .center-text { text-align: center; margin-top: 15px; }
 
         /* Print */
         @media print {
@@ -171,12 +172,23 @@
                     <div class="form-group"><label>Username</label><input type="text" id="adminUser" required></div>
                     <div class="form-group"><label>Password</label><input type="password" id="adminPass" required></div>
                     <button type="submit" class="btn">Masuk</button>
-                    <button type="button" class="btn btn-secondary" onclick="router('register-admin')">Daftar Admin Cabang Baru</button>
                     
+                    <div class="center-text">
+                        <button type="button" class="link-btn" onclick="router('register-admin')">Daftar Admin Cabang Baru</button>
+                    </div>
+
                     <!-- FITUR RESET PASSWORD -->
-                    <button type="button" class="link-btn" onclick="resetPassword()" style="width: 100%; text-align: center;">
-                        Lupa Password? Reset di sini
-                    </button>
+                    <div class="center-text" style="margin-top: 5px; border-top: 1px solid #eee; padding-top: 15px;">
+                        <small style="color: #999;">Lupa password?</small>
+                        <button type="button" class="link-btn" onclick="router('reset-password')" style="margin-top: 0; font-size: 0.85rem; color: var(--danger);">Reset Password</button>
+                    </div>
+
+                    <!-- FITUR BUAT ADMIN PUSAT (HIDDEN / DEVELOPER) -->
+                    <div class="center-text" style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee;">
+                        <button type="button" onclick="createPusatAdminIfNotExist()" style="background: none; border: 1px dashed #ccc; font-size: 0.75rem; color: #999; cursor: pointer; padding: 5px 10px;">
+                            (Buat Akun Admin Pusat)
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>
@@ -184,32 +196,17 @@
         <!-- HALAMAN RESET PASSWORD -->
         <section id="reset-password" class="section">
             <div class="card">
-                <h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;">Reset Password Admin</h2>
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;">Reset Password</h2>
                 <p style="font-size: 0.9rem; margin-bottom: 20px; text-align: center; color: #666;">
-                    Pilih cabang lomba dan masukkan username untuk mereset password menjadi <strong>123456</strong>.
+                    Masukkan Username Admin. Password akan direset menjadi <strong>123456</strong>.
                 </p>
                 <form id="resetForm">
                     <div class="form-group">
-                        <label>Cabang Admin</label>
-                        <select id="resetBranch" required>
-                            <option value="">-- Pilih Cabang --</option>
-                            <option value="Sepak Bola">Sepak Bola</option>
-                            <option value="Bola Voli">Bola Voli</option>
-                            <option value="Tenis Meja">Tenis Meja</option>
-                            <option value="Bulu Tangkis">Bulu Tangkis</option>
-                            <option value="Atletik Kids">Atletik Kids</option>
-                            <option value="Catur">Catur</option>
-                            <option value="Pencak Silat">Pencak Silat</option>
-                            <option value="Karate">Karate</option>
-                            <option value="Renang">Renang</option>
-                            <option value="PUSAT">Admin Pusat</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label>Username Admin</label>
-                        <input type="text" id="resetUser" placeholder="Username yang terdaftar" required>
+                        <input type="text" id="resetUser" placeholder="Masukkan username" required>
                     </div>
-                    <button type="submit" class="btn" style="background: var(--danger);">Reset Password</button>
+                    <!-- Hapus dropdown cabang agar tidak membingungkan, cari by username saja -->
+                    <button type="submit" class="btn" style="background: var(--danger);">Reset Password Sekarang</button>
                     <button type="button" class="btn btn-secondary" onclick="router('login')">Batal</button>
                 </form>
             </div>
@@ -243,7 +240,7 @@
             </div>
         </section>
 
-        <!-- DASHBOARD ADMIN (Biasa & Pusat) -->
+        <!-- DASHBOARD ADMIN -->
         <section id="dashboard" class="section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
                 <h2 id="dashTitle">Dashboard Admin</h2>
@@ -254,10 +251,10 @@
             </div>
 
             <!-- Filter Khusus Admin Pusat -->
-            <div id="adminPusatFilter" class="card no-print" style="display:none;">
+            <div id="adminPusatFilter" class="card no-print" style="display:none; padding: 15px 2rem;">
                 <div class="filter-group">
-                    <label>Filter Cabang:</label>
-                    <select id="filterBranch" onchange="loadDashboard()">
+                    <label style="margin-bottom:0;"><strong>Filter Cabang:</strong></label>
+                    <select id="filterBranch" onchange="loadDashboard()" style="width: auto;">
                         <option value="ALL">Semua Cabang</option>
                         <option value="Sepak Bola">Sepak Bola</option>
                         <option value="Bola Voli">Bola Voli</option>
@@ -296,7 +293,7 @@
             <div id="bracketSection" class="card no-print">
                 <h3>Bagan Pertandingan</h3>
                 <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">
-                    Klik tombol "Atur Lawan" untuk memindahkan tim ke slot yang kosong ( lawan ).
+                    Klik tombol "Atur Lawan" untuk memindahkan tim ke slot yang kosong.
                 </p>
                 <button onclick="generateBracket()" class="btn btn-sm" style="width: auto; background-color: var(--secondary); margin-bottom: 10px;">Generate / Refresh Bagan</button>
                 <button onclick="window.print()" class="btn btn-sm btn-print">Cetak Bagan</button>
@@ -366,14 +363,10 @@
             const isPusat = currentAdmin.branch === 'PUSAT';
             document.getElementById('dashTitle').innerText = isPusat ? 'Dashboard Admin Pusat' : `Admin: ${currentAdmin.branch}`;
             
-            // Tampilkan filter cabang hanya untuk Admin Pusat
             document.getElementById('adminPusatFilter').style.display = isPusat ? 'block' : 'none';
-            
-            // Sembunyikan bagan untuk Admin Pusat (karena melihat semua cabang)
             document.getElementById('bracketSection').style.display = isPusat ? 'none' : 'block';
             document.getElementById('bracketContainer').style.display = isPusat ? 'none' : 'block';
             
-            // Tampilkan kolom Cabang di tabel jika Pusat
             const branchTh = document.querySelector('#teamsTable th:nth-child(2)');
             branchTh.style.display = isPusat ? 'table-cell' : 'none';
         }
@@ -453,13 +446,6 @@
             }
         }
 
-        async function uploadFileToStorage(file, path) {
-            const storageRef = storage.ref(path);
-            await storageRef.put(file);
-            const url = await storageRef.child(path).getDownloadURL();
-            return url;
-        }
-
         // --- REGISTRATION ---
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -494,7 +480,11 @@
                         const ext = file.name.split('.').pop();
                         const uniqueName = `${Date.now()}-${school.replace(/\s+/g, '_')}-${name.replace(/\s+/g, '_')}.${ext}`;
                         const filePath = `biodata/${branch}/${uniqueName}`;
-                        fileUrl = await uploadFileToStorage(file, filePath);
+                        
+                        // Upload File
+                        const storageRef = storage.ref(filePath);
+                        await storageRef.put(file);
+                        fileUrl = await storageRef.getDownloadURL();
                         fileName = file.name;
                     }
 
@@ -512,6 +502,7 @@
                 document.getElementById('teamCountGroup').style.display = 'none';
 
             } catch (error) {
+                console.error(error);
                 showToast(error.message, 'error');
             } finally {
                 btn.disabled = false;
@@ -520,6 +511,29 @@
         });
 
         // --- AUTH & RESET PASSWORD ---
+        
+        // Fungsi: Buat Admin Pusat Otomatis jika belum ada
+        async function createPusatAdminIfNotExist() {
+            try {
+                const snapshot = await db.collection('admins').where('branch', '==', 'PUSAT').get();
+                if (!snapshot.empty) {
+                    showToast('Admin Pusat sudah ada! Silakan login.', 'error');
+                    return;
+                }
+
+                await db.collection('admins').add({ 
+                    username: 'adminpusat', 
+                    password: 'adminpusat', 
+                    branch: 'PUSAT' 
+                });
+                
+                showToast('Admin Pusat dibuat! User: adminpusat, Pass: adminpusat', 'success');
+                document.getElementById('adminUser').value = 'adminpusat';
+            } catch (err) {
+                showToast('Gagal membuat admin pusat: ' + err.message, 'error');
+            }
+        }
+
         document.getElementById('adminRegForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const user = document.getElementById('newAdminUser').value;
@@ -543,12 +557,7 @@
             const user = document.getElementById('adminUser').value;
             const pass = document.getElementById('adminPass').value;
 
-            try {
-                // Cek Admin Pusat (Hardcoded atau bisa dipindah ke DB)
-                // Konsep: Admin Pusat bisa melihat semua
-                // Untuk simplisitas, kita buat admin pusat bisa login dengan username tertentu di DB atau hardcode.
-                // Mari kita cek di collection admins dulu, jika ada field branch='PUSAT', itu dia.
-                
+            try {                
                 const snapshot = await db.collection('admins').where('username', '==', user).where('password', '==', pass).get();
                 
                 if (snapshot.empty) throw new Error('Username atau Password salah');
@@ -564,33 +573,36 @@
             }
         });
 
-        // FITUR RESET PASSWORD
-        function resetPassword() {
-            router('reset-password');
-        }
-
+        // LOGIKA RESET PASSWORD YANG DIPERBAIKI
         document.getElementById('resetForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const branch = document.getElementById('resetBranch').value;
-            const user = document.getElementById('resetUser').value;
+            const user = document.getElementById('resetUser').value.trim();
 
-            if(!confirm(`Yakin ingin reset password admin "${user}" cabang "${branch}" menjadi 123456?`)) return;
+            if(!user) {
+                showToast('Masukkan username!', 'error');
+                return;
+            }
+
+            if(!confirm(`Yakin ingin reset password admin "${user}" menjadi 123456?`)) return;
 
             try {
+                // 1. Cari admin berdasarkan Username saja
                 const snapshot = await db.collection('admins')
-                    .where('branch', '==', branch)
                     .where('username', '==', user)
                     .limit(1)
                     .get();
 
                 if(snapshot.empty) {
-                    throw new Error('Admin tidak ditemukan!');
+                    throw new Error('Admin dengan username tersebut tidak ditemukan!');
                 }
 
                 const doc = snapshot.docs[0];
+                const adminData = doc.data();
+
+                // 2. Update password
                 await db.collection('admins').doc(doc.id).update({ password: '123456' });
 
-                showToast('Password berhasil direset menjadi 123456', 'success');
+                showToast(`Reset berhasil! Password admin ${adminData.branch} sekarang: 123456`, 'success');
                 router('login');
             } catch(err) {
                 showToast(err.message, 'error');
@@ -611,7 +623,6 @@
 
             let query = db.collection('teams');
             
-            // Jika Admin Biasa, filter by cabang. Jika Pusat, filter by dropdown (default ALL)
             if (!isPusat) {
                 query = query.where('branch', '==', currentAdmin.branch);
             } else if (filterVal !== 'ALL') {
@@ -651,7 +662,6 @@
                     tbody.appendChild(tr);
                 });
                 
-                // Refresh bracket jika bukan pusat
                 if(!isPusat && document.getElementById('bracketContainer').innerHTML !== '') {
                     generateBracket(); 
                 }
@@ -698,7 +708,7 @@
             document.getElementById('memberModal').style.display = 'none';
         }
 
-        // --- EXPORT CSV (Untuk Admin Pusat) ---
+        // --- EXPORT CSV ---
         function exportToCSV() {
             if(teamsData.length === 0) {
                 showToast("Tidak ada data untuk diexport", "error");
@@ -708,7 +718,7 @@
             let csv = 'No,Sekolah,Cabang,Nama,NISN,Kelas,Status Biodata\n';
             
             teamsData.forEach((team, tIdx) => {
-                team.members.forEach((m, mIdx) => {
+                team.members.forEach((m) => {
                     const num = tIdx + 1;
                     const status = m.fileUrl ? 'Lengkap' : 'Kurang';
                     csv += `${num},"${team.school}","${team.branch}","${m.name}",${m.nisn},${m.class},${status}\n`;
@@ -724,7 +734,6 @@
         }
 
         // --- BRACKET LOGIC (WITH EDITING) ---
-        // Menyimpan state bagan di lokal (tidak disimpan ke DB permanen agar ringan, hanya untuk visualisasi & cetak)
         let currentBracketState = [];
 
         function generateBracket() {
@@ -736,30 +745,25 @@
                 return;
             }
 
-            // Acak tim untuk generate awal
             const shuffled = teams.sort(() => 0.5 - Math.random());
             
             let slots = 1;
             while(slots < shuffled.length) slots *= 2;
             const rounds = Math.log2(slots);
 
-            // State: Array of Rounds. Setiap round punya array of matches.
             currentBracketState = [];
             let teamIdx = 0;
 
-            // Inisialisasi state
             for(let r=0; r<rounds; r++) {
                 const matchesInRound = Math.ceil(slots / Math.pow(2, r+1));
                 currentBracketState[r] = [];
                 
                 for(let m=0; m<matchesInRound; m++) {
                     if(r === 0) {
-                        // Ronde 1: Isi dengan tim
                         const team1 = teamIdx < shuffled.length ? shuffled[teamIdx++] : null;
                         const team2 = teamIdx < shuffled.length ? shuffled[teamIdx++] : null;
                         currentBracketState[r].push([team1, team2]);
                     } else {
-                        // Ronde selanjutnya: Kosong
                         currentBracketState[r].push([null, null]);
                     }
                 }
@@ -782,7 +786,7 @@
                         const team = match[side];
                         const isTeamObj = team !== null;
                         
-                        html += `<div class="team" data-round="${rIdx}" data-match="${mIdx}" data-side="${side}">`;
+                        html += `<div class="team">`;
                         
                         if(isTeamObj) {
                             html += `
@@ -795,7 +799,6 @@
                                 </div>
                             `;
                         } else {
-                            // Slot Kosong
                             html += `<span style="color:#ccc;">(Kosong)</span>`;
                             html += `<div class="team-actions no-print">
                                 <button class="btn-success-sm" onclick="openMoveModal(${rIdx}, ${mIdx}, ${side})">Atur Lawan</button>
@@ -815,8 +818,7 @@
             container.innerHTML = html;
         }
 
-        // Logika Memindahkan Tim
-        let moveTarget = null; // {rIdx, mIdx, side}
+        let moveTarget = null; 
 
         function removeTeamFromBracket(rIdx, mIdx, side) {
             const team = currentBracketState[rIdx][mIdx][side];
@@ -828,7 +830,6 @@
         function openMoveModal(rIdx, mIdx, side) {
             moveTarget = {rIdx, mIdx, side};
             
-            // Kumpulkan tim yang belum ditempatkan di bracket saat ini
             let teamsInBracket = [];
             currentBracketState.forEach(round => {
                 round.forEach(match => {
@@ -844,7 +845,7 @@
                 return;
             }
 
-            let listHtml = '<ul style="list-style:none;">';
+            let listHtml = '<ul style="list-style:none; padding:0;">';
             availableTeams.forEach(t => {
                 listHtml += `<li style="margin-bottom:10px;">
                     <button class="btn btn-sm" style="width:100%; text-align:left;" onclick="placeTeamInSlot('${t.id}')">${t.school}</button>
