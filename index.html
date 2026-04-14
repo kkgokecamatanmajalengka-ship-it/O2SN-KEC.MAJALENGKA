@@ -25,7 +25,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* --- Header --- */
         header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
         header h1 { font-size: 1.5rem; font-weight: 700; }
         nav { display: flex; gap: 10px; }
@@ -33,13 +32,11 @@
         nav button:hover { background: rgba(255,255,255,0.4); }
         nav button.active { background: var(--accent); color: var(--primary); font-weight: bold; border-color: var(--accent); }
 
-        /* --- Layout --- */
         main { flex: 1; padding: 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
         .section { display: none; animation: fadeIn 0.5s ease; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Forms & Cards --- */
         .card { background: var(--white); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; }
         .form-group { margin-bottom: 1.5rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--primary); }
@@ -48,7 +45,6 @@
         .btn:hover { background: #134b61; }
         .btn:disabled { background: #ccc; cursor: not-allowed; }
         .btn-secondary { background: #6c757d; margin-top: 10px; }
-        .btn-warning { background: var(--accent); color: var(--primary); margin-top: 10px; }
         .btn-print { background: var(--accent); color: var(--primary); margin-top: 1rem; width: auto; }
         .btn-sm { padding: 5px 10px; font-size: 0.8rem; width: auto; }
         .btn-danger-sm { background: var(--danger); color: white; border: none; cursor: pointer; }
@@ -56,35 +52,27 @@
         
         .link-btn { background: none; border: none; color: var(--secondary); cursor: pointer; text-decoration: underline; margin-top: 10px; font-size: 0.9rem; display: inline-block; width: 100%; text-align: center; }
 
-        /* Dynamic Member Inputs */
         .member-input-group { background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; border-radius: var(--radius); margin-bottom: 15px; }
         .member-number { background: var(--secondary); color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 0.8rem; margin-right: 10px; vertical-align: middle; }
 
-        /* --- Dashboard Tables --- */
         .table-container { overflow-x: auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; font-size: 0.9rem; }
         th { background-color: var(--primary); color: white; }
         tr:hover { background-color: #f1f1f1; }
-        .status-icon { display: inline-block; width: 20px; text-align: center; }
-        .status-icon.uploaded { color: var(--success); }
-        .status-icon.missing { color: var(--danger); }
         .detail-btn { color: var(--primary); cursor: pointer; text-decoration: underline; font-weight: bold; background: none; border: none; }
 
-        /* --- Bagan/Bracket --- */
-        .bracket-wrapper { overflow-x: auto; padding: 20px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); min-height: 300px; position: relative; }
+        .bracket-wrapper { overflow-x: auto; padding: 20px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); min-height: 300px; }
         .bracket { display: flex; gap: 50px; min-width: max-content; }
         .round { display: flex; flex-direction: column; justify-content: space-around; width: 220px; min-width: 220px; }
         .round-title { text-align: center; margin-bottom: 10px; font-weight: bold; color: var(--secondary); text-transform: uppercase; font-size: 0.9rem; }
-        .match { background: #fff; border: 1px solid #ccc; border-radius: 4px; margin: 10px 0; position: relative; min-height: 50px; display: flex; flex-direction: column; justify-content: center; }
-        .team { padding: 8px 10px; font-size: 0.9rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
-        .team:hover { background: #f9f9f9; }
+        .match { background: #fff; border: 1px solid #ccc; border-radius: 4px; margin: 10px 0; min-height: 50px; display: flex; flex-direction: column; justify-content: center; }
+        .team { padding: 8px 10px; font-size: 0.9rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .team:last-child { border-bottom: none; }
         .school-name { font-weight: 800; color: var(--primary); text-transform: uppercase; font-size: 0.8rem; }
         .team-count { font-size: 0.75rem; color: #777; background: #eee; padding: 2px 6px; border-radius: 4px; }
         .team-actions { display: flex; gap: 5px; margin-left: 10px; }
 
-        /* --- Toast --- */
         #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         .toast { background: #333; color: white; padding: 12px 24px; border-radius: var(--radius); margin-top: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards; }
         .toast.success { background: var(--success); }
@@ -92,24 +80,20 @@
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
-        /* --- Modal --- */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
         .modal-content { background-color: #fff; margin: 5% auto; padding: 20px; border-radius: var(--radius); width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; position: relative; }
         .close-modal { position: absolute; right: 20px; top: 15px; font-size: 28px; font-weight: bold; cursor: pointer; color: #aaa; }
         .close-modal:hover { color: #000; }
 
-        /* Admin Pusat Styles */
         .filter-group { margin-bottom: 1rem; display: flex; gap: 10px; align-items: center; }
         .badge { background: var(--accent); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
         .center-text { text-align: center; margin-top: 15px; }
 
-        /* Print */
         @media print {
             header, nav, .no-print, .btn, .form-group, .team-actions { display: none !important; }
             body { background: white; }
             main { padding: 0; margin: 0; max-width: none; }
             .card { box-shadow: none; border: 1px solid #ccc; width: 100%; max-width: none; page-break-inside: avoid; }
-            .bracket-wrapper { box-shadow: none; border: none; page-break-inside: avoid; }
         }
     </style>
 </head>
@@ -153,13 +137,12 @@
                     <div id="teamCountGroup" class="form-group" style="display:none;">
                         <label>Jumlah Anggota Tim</label>
                         <input type="number" id="teamCount" min="1" max="30" value="1" onchange="generateMemberInputs()">
-                        <small style="color: #666;">Masukkan jumlah total pemain.</small>
                     </div>
 
                     <div id="membersContainer"></div>
 
                     <button type="submit" class="btn" id="btnSubmit">Daftar Sekarang</button>
-                    <div id="loadingIndicator" style="display:none; text-align:center; margin-top:10px; color: var(--secondary);">Mengirim data & upload file...</div>
+                    <div id="loadingIndicator" style="display:none; text-align:center; margin-top:10px; color: var(--secondary);">Mengirim data...</div>
                 </form>
             </div>
         </section>
@@ -180,10 +163,9 @@
                     <!-- FITUR RESET PASSWORD -->
                     <div class="center-text" style="margin-top: 5px; border-top: 1px solid #eee; padding-top: 15px;">
                         <small style="color: #999;">Lupa password?</small>
-                        <button type="button" class="link-btn" onclick="router('reset-password')" style="margin-top: 0; font-size: 0.85rem; color: var(--danger);">Reset Password</button>
+                        <button type="button" class="link-btn" onclick="router('reset-password')" style="margin-top: 0; font-size: 0.85rem; color: var(--danger);">Reset Password per Cabang</button>
                     </div>
 
-                    <!-- FITUR BUAT ADMIN PUSAT (HIDDEN / DEVELOPER) -->
                     <div class="center-text" style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee;">
                         <button type="button" onclick="createPusatAdminIfNotExist()" style="background: none; border: 1px dashed #ccc; font-size: 0.75rem; color: #999; cursor: pointer; padding: 5px 10px;">
                             (Buat Akun Admin Pusat)
@@ -193,19 +175,30 @@
             </div>
         </section>
 
-        <!-- HALAMAN RESET PASSWORD -->
+        <!-- HALAMAN RESET PASSWORD (SIMPLE) -->
         <section id="reset-password" class="section">
             <div class="card">
                 <h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;">Reset Password</h2>
                 <p style="font-size: 0.9rem; margin-bottom: 20px; text-align: center; color: #666;">
-                    Masukkan Username Admin. Password akan direset menjadi <strong>123456</strong>.
+                    Pilih <strong>Cabang</strong>, lalu klik tombol reset. Password akan direset menjadi <strong>123456</strong>.
                 </p>
                 <form id="resetForm">
                     <div class="form-group">
-                        <label>Username Admin</label>
-                        <input type="text" id="resetUser" placeholder="Masukkan username" required>
+                        <label>Pilih Cabang Admin</label>
+                        <select id="resetBranch" required>
+                            <option value="">-- Pilih Cabang --</option>
+                            <option value="Sepak Bola">Sepak Bola</option>
+                            <option value="Bola Voli">Bola Voli</option>
+                            <option value="Tenis Meja">Tenis Meja</option>
+                            <option value="Bulu Tangkis">Bulu Tangkis</option>
+                            <option value="Atletik Kids">Atletik Kids</option>
+                            <option value="Catur">Catur</option>
+                            <option value="Pencak Silat">Pencak Silat</option>
+                            <option value="Karate">Karate</option>
+                            <option value="Renang">Renang</option>
+                            <option value="PUSAT">Admin Pusat</option>
+                        </select>
                     </div>
-                    <!-- Hapus dropdown cabang agar tidak membingungkan, cari by username saja -->
                     <button type="submit" class="btn" style="background: var(--danger);">Reset Password Sekarang</button>
                     <button type="button" class="btn btn-secondary" onclick="router('login')">Batal</button>
                 </form>
@@ -250,7 +243,6 @@
                 </div>
             </div>
 
-            <!-- Filter Khusus Admin Pusat -->
             <div id="adminPusatFilter" class="card no-print" style="display:none; padding: 15px 2rem;">
                 <div class="filter-group">
                     <label style="margin-bottom:0;"><strong>Filter Cabang:</strong></label>
@@ -276,7 +268,7 @@
                         <thead>
                             <tr>
                                 <th>Nama Sekolah / Tim</th>
-                                <th>Cabang</th> <!-- Kolom Cabang untuk Admin Pusat -->
+                                <th>Cabang</th>
                                 <th>Jumlah Anggota</th>
                                 <th>Status Biodata</th>
                                 <th>Aksi</th>
@@ -289,13 +281,12 @@
                 </div>
             </div>
 
-            <!-- BAGAN HANYA UNTUK ADMIN CABANG -->
             <div id="bracketSection" class="card no-print">
                 <h3>Bagan Pertandingan</h3>
                 <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">
-                    Klik tombol "Atur Lawan" untuk memindahkan tim ke slot yang kosong.
+                    Klik "Atur Lawan" untuk mengedit lawan.
                 </p>
-                <button onclick="generateBracket()" class="btn btn-sm" style="width: auto; background-color: var(--secondary); margin-bottom: 10px;">Generate / Refresh Bagan</button>
+                <button onclick="generateBracket()" class="btn btn-sm" style="width: auto; background-color: var(--secondary); margin-bottom: 10px;">Generate Bagan</button>
                 <button onclick="window.print()" class="btn btn-sm btn-print">Cetak Bagan</button>
             </div>
 
@@ -305,7 +296,7 @@
         </section>
     </main>
 
-    <!-- MODAL DETAIL ANGGOTA -->
+    <!-- MODAL -->
     <div id="memberModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -317,7 +308,7 @@
     <div id="toast-container"></div>
 
     <script>
-        // --- FIREBASE CONFIGURATION ---
+        // --- FIREBASE CONFIG ---
         const firebaseConfig = {
             apiKey: "AIzaSyB-QsR4RDsVaDM5Ohzm9EqWIOIWfIN63wI",
             authDomain: "pendaftaran-o2sn.firebaseapp.com",
@@ -332,13 +323,11 @@
         const db = firebase.firestore();
         const storage = firebase.storage();
 
-        // --- STATE ---
         let currentAdmin = null;
         let teamsData = []; 
 
         router('home');
 
-        // --- ROUTER ---
         function router(pageId) {
             document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
@@ -358,20 +347,15 @@
             }
         }
 
-        // --- UI SETUP ---
         function setupDashboardUI() {
             const isPusat = currentAdmin.branch === 'PUSAT';
             document.getElementById('dashTitle').innerText = isPusat ? 'Dashboard Admin Pusat' : `Admin: ${currentAdmin.branch}`;
-            
             document.getElementById('adminPusatFilter').style.display = isPusat ? 'block' : 'none';
             document.getElementById('bracketSection').style.display = isPusat ? 'none' : 'block';
             document.getElementById('bracketContainer').style.display = isPusat ? 'none' : 'block';
-            
-            const branchTh = document.querySelector('#teamsTable th:nth-child(2)');
-            branchTh.style.display = isPusat ? 'table-cell' : 'none';
+            document.querySelector('#teamsTable th:nth-child(2)').style.display = isPusat ? 'table-cell' : 'none';
         }
 
-        // --- FORM HANDLING ---
         function handleBranchChange() {
             const branch = document.getElementById('regBranch').value;
             const teamGroup = document.getElementById('teamCountGroup');
@@ -446,7 +430,6 @@
             }
         }
 
-        // --- REGISTRATION ---
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
@@ -480,8 +463,6 @@
                         const ext = file.name.split('.').pop();
                         const uniqueName = `${Date.now()}-${school.replace(/\s+/g, '_')}-${name.replace(/\s+/g, '_')}.${ext}`;
                         const filePath = `biodata/${branch}/${uniqueName}`;
-                        
-                        // Upload File
                         const storageRef = storage.ref(filePath);
                         await storageRef.put(file);
                         fileUrl = await storageRef.getDownloadURL();
@@ -502,7 +483,6 @@
                 document.getElementById('teamCountGroup').style.display = 'none';
 
             } catch (error) {
-                console.error(error);
                 showToast(error.message, 'error');
             } finally {
                 btn.disabled = false;
@@ -510,27 +490,19 @@
             }
         });
 
-        // --- AUTH & RESET PASSWORD ---
+        // --- AUTH LOGIC ---
         
-        // Fungsi: Buat Admin Pusat Otomatis jika belum ada
         async function createPusatAdminIfNotExist() {
             try {
                 const snapshot = await db.collection('admins').where('branch', '==', 'PUSAT').get();
                 if (!snapshot.empty) {
-                    showToast('Admin Pusat sudah ada! Silakan login.', 'error');
+                    showToast('Admin Pusat sudah ada!', 'error');
                     return;
                 }
-
-                await db.collection('admins').add({ 
-                    username: 'adminpusat', 
-                    password: 'adminpusat', 
-                    branch: 'PUSAT' 
-                });
-                
-                showToast('Admin Pusat dibuat! User: adminpusat, Pass: adminpusat', 'success');
-                document.getElementById('adminUser').value = 'adminpusat';
+                await db.collection('admins').add({ username: 'adminpusat', password: 'adminpusat', branch: 'PUSAT' });
+                showToast('Dibuat! User: adminpusat, Pass: adminpusat', 'success');
             } catch (err) {
-                showToast('Gagal membuat admin pusat: ' + err.message, 'error');
+                showToast(err.message, 'error');
             }
         }
 
@@ -543,9 +515,8 @@
             try {
                 const snapshot = await db.collection('admins').where('branch', '==', branch).get();
                 if (!snapshot.empty) throw new Error('Admin cabang ini sudah ada!');
-
                 await db.collection('admins').add({ username: user, password: pass, branch });
-                showToast('Registrasi Admin Berhasil', 'success');
+                showToast('Registrasi Berhasil', 'success');
                 router('login');
             } catch (err) {
                 showToast(err.message, 'error');
@@ -559,13 +530,10 @@
 
             try {                
                 const snapshot = await db.collection('admins').where('username', '==', user).where('password', '==', pass).get();
-                
                 if (snapshot.empty) throw new Error('Username atau Password salah');
-
                 const doc = snapshot.docs[0];
                 currentAdmin = doc.data();
                 currentAdmin.id = doc.id;
-
                 router('dashboard');
                 showToast(`Selamat datang ${currentAdmin.branch}`, 'success');
             } catch (err) {
@@ -573,36 +541,33 @@
             }
         });
 
-        // LOGIKA RESET PASSWORD YANG DIPERBAIKI
+        // --- LOGIKA RESET SIMPLE (Hanya Pilih Cabang) ---
         document.getElementById('resetForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const user = document.getElementById('resetUser').value.trim();
+            const branch = document.getElementById('resetBranch').value;
 
-            if(!user) {
-                showToast('Masukkan username!', 'error');
+            if(!branch) {
+                showToast('Pilih cabang dulu!', 'error');
                 return;
             }
 
-            if(!confirm(`Yakin ingin reset password admin "${user}" menjadi 123456?`)) return;
+            if(!confirm(`Reset password admin cabang "${branch}" menjadi 123456?`)) return;
 
             try {
-                // 1. Cari admin berdasarkan Username saja
+                // Cari admin berdasarkan cabang
                 const snapshot = await db.collection('admins')
-                    .where('username', '==', user)
+                    .where('branch', '==', branch)
                     .limit(1)
                     .get();
 
                 if(snapshot.empty) {
-                    throw new Error('Admin dengan username tersebut tidak ditemukan!');
+                    throw new Error(`Admin untuk cabang "${branch}" belum terdaftar!`);
                 }
 
                 const doc = snapshot.docs[0];
-                const adminData = doc.data();
-
-                // 2. Update password
                 await db.collection('admins').doc(doc.id).update({ password: '123456' });
 
-                showToast(`Reset berhasil! Password admin ${adminData.branch} sekarang: 123456`, 'success');
+                showToast('Sukses! Password sekarang: 123456', 'success');
                 router('login');
             } catch(err) {
                 showToast(err.message, 'error');
@@ -614,7 +579,7 @@
             router('home');
         }
 
-        // --- DASHBOARD LOGIC ---
+        // --- DASHBOARD ---
         function loadDashboard() {
             const tbody = document.querySelector('#teamsTable tbody');
             tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Memuat data...</td></tr>';
@@ -667,86 +632,61 @@
                 }
              }, error => {
                  console.error(error);
-                 tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Gagal memuat data.</td></tr>';
              });
         }
 
         function deleteTeam(id) {
             if(!confirm('Hapus tim ini?')) return;
-            db.collection('teams').doc(id).delete()
-            .then(() => showToast('Tim dihapus', 'success'))
-            .catch(err => showToast(err.message, 'error'));
+            db.collection('teams').doc(id).delete().then(() => showToast('Terhapus', 'success'));
         }
 
         function showTeamDetail(teamId) {
             const team = teamsData.find(t => t.id === teamId);
             if(!team) return;
-
             document.getElementById('modalSchoolName').innerText = `Tim: ${team.school} (${team.branch})`;
             const list = document.getElementById('modalMemberList');
             list.innerHTML = '';
-
             team.members.forEach((m, idx) => {
-                const icon = m.fileUrl ? `<span class="status-icon uploaded">✔</span>` : `<span class="status-icon missing">✖</span>`;
-                const downloadBtn = m.fileUrl ? 
-                    `<a href="${m.fileUrl}" target="_blank" style="margin-left:10px; color:blue; font-size:0.8rem;">[Unduh Biodata]</a>` : 
-                    `<span style="margin-left:10px; color:#999; font-size:0.8rem;">[Belum Upload]</span>`;
-
+                const icon = m.fileUrl ? `✔` : `✖`;
+                const downloadBtn = m.fileUrl ? `<a href="${m.fileUrl}" target="_blank" style="margin-left:10px; color:blue; font-size:0.8rem;">[Unduh]</a>` : ``;
                 list.innerHTML += `
                     <div style="border-bottom:1px solid #eee; padding:10px 0;">
                         <div style="font-weight:bold;">${idx+1}. ${m.name}</div>
                         <div style="font-size:0.9rem; color:#555;">NISN: ${m.nisn} | Kelas: ${m.class}</div>
-                        <div style="margin-top:5px;">${icon} Status Biodata ${downloadBtn}</div>
+                        <div style="margin-top:5px;">${icon} Biodata ${downloadBtn}</div>
                     </div>
                 `;
             });
-
             document.getElementById('memberModal').style.display = 'block';
         }
 
-        function closeModal() {
-            document.getElementById('memberModal').style.display = 'none';
-        }
+        function closeModal() { document.getElementById('memberModal').style.display = 'none'; }
 
-        // --- EXPORT CSV ---
         function exportToCSV() {
-            if(teamsData.length === 0) {
-                showToast("Tidak ada data untuk diexport", "error");
-                return;
-            }
-
-            let csv = 'No,Sekolah,Cabang,Nama,NISN,Kelas,Status Biodata\n';
-            
+            if(teamsData.length === 0) { showToast("Data kosong", "error"); return; }
+            let csv = 'No,Sekolah,Cabang,Nama,NISN,Kelas,Status\n';
             teamsData.forEach((team, tIdx) => {
                 team.members.forEach((m) => {
-                    const num = tIdx + 1;
-                    const status = m.fileUrl ? 'Lengkap' : 'Kurang';
-                    csv += `${num},"${team.school}","${team.branch}","${m.name}",${m.nisn},${m.class},${status}\n`;
+                    csv += `${tIdx+1},"${team.school}","${team.branch}","${m.name}",${m.nisn},${m.class},${m.fileUrl ? 'Lengkap' : 'Kurang'}\n`;
                 });
             });
-
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `Rekap_O2SN_${new Date().toLocaleDateString()}.csv`;
+            a.download = `Rekap_O2SN.csv`;
             a.click();
         }
 
-        // --- BRACKET LOGIC (WITH EDITING) ---
+        // --- BRACKET ---
         let currentBracketState = [];
 
         function generateBracket() {
             const container = document.getElementById('bracketContainer');
             const teams = [...teamsData]; 
-
-            if(teams.length < 2) {
-                container.innerHTML = '<p style="color:red; text-align:center;">Minimal butuh 2 Tim.</p>';
-                return;
-            }
+            if(teams.length < 2) { container.innerHTML = '<p style="color:red; text-align:center;">Minimal 2 Tim.</p>'; return; }
 
             const shuffled = teams.sort(() => 0.5 - Math.random());
-            
             let slots = 1;
             while(slots < shuffled.length) slots *= 2;
             const rounds = Math.log2(slots);
@@ -757,7 +697,6 @@
             for(let r=0; r<rounds; r++) {
                 const matchesInRound = Math.ceil(slots / Math.pow(2, r+1));
                 currentBracketState[r] = [];
-                
                 for(let m=0; m<matchesInRound; m++) {
                     if(r === 0) {
                         const team1 = teamIdx < shuffled.length ? shuffled[teamIdx++] : null;
@@ -768,107 +707,67 @@
                     }
                 }
             }
-
             renderBracket();
         }
 
         function renderBracket() {
             const container = document.getElementById('bracketContainer');
             let html = '<div class="bracket">';
-
             currentBracketState.forEach((roundMatches, rIdx) => {
                 html += `<div class="round"><div class="round-title">Ronde ${rIdx+1}</div>`;
-                
                 roundMatches.forEach((match, mIdx) => {
                     html += `<div class="match">`;
-                    
                     [0, 1].forEach(side => {
                         const team = match[side];
-                        const isTeamObj = team !== null;
-                        
                         html += `<div class="team">`;
-                        
-                        if(isTeamObj) {
-                            html += `
-                                <div>
-                                    <span class="school-name">${team.school}</span>
-                                    <span class="team-count">${team.members.length} Pemain</span>
-                                </div>
-                                <div class="team-actions no-print">
-                                    <button class="btn-danger-sm" onclick="removeTeamFromBracket(${rIdx}, ${mIdx}, ${side})">X</button>
-                                </div>
-                            `;
+                        if(team) {
+                            html += `<div><span class="school-name">${team.school}</span></div>
+                                     <div class="team-actions no-print"><button class="btn-danger-sm" onclick="removeTeamFromBracket(${rIdx}, ${mIdx}, ${side})">X</button></div>`;
                         } else {
-                            html += `<span style="color:#ccc;">(Kosong)</span>`;
-                            html += `<div class="team-actions no-print">
-                                <button class="btn-success-sm" onclick="openMoveModal(${rIdx}, ${mIdx}, ${side})">Atur Lawan</button>
-                            </div>`;
+                            html += `<span style="color:#ccc;">(Kosong)</span>
+                                     <div class="team-actions no-print"><button class="btn-success-sm" onclick="openMoveModal(${rIdx}, ${mIdx}, ${side})">Atur Lawan</button></div>`;
                         }
-                        
                         html += `</div>`;
                     });
-
                     html += `</div>`;
                 });
-
                 html += `</div>`;
             });
-
             html += '</div>';
             container.innerHTML = html;
         }
 
-        let moveTarget = null; 
-
+        let moveTarget = null;
         function removeTeamFromBracket(rIdx, mIdx, side) {
-            const team = currentBracketState[rIdx][mIdx][side];
             currentBracketState[rIdx][mIdx][side] = null;
-            showToast(`${team.school} dilepas`, 'success');
             renderBracket();
         }
-
         function openMoveModal(rIdx, mIdx, side) {
             moveTarget = {rIdx, mIdx, side};
-            
             let teamsInBracket = [];
-            currentBracketState.forEach(round => {
-                round.forEach(match => {
-                    if(match[0]) teamsInBracket.push(match[0].id);
-                    if(match[1]) teamsInBracket.push(match[1].id);
-                });
-            });
-
+            currentBracketState.forEach(round => { round.forEach(match => {
+                if(match[0]) teamsInBracket.push(match[0].id);
+                if(match[1]) teamsInBracket.push(match[1].id);
+            });});
             const availableTeams = teamsData.filter(t => !teamsInBracket.includes(t.id));
-
-            if(availableTeams.length === 0) {
-                showToast('Semua tim sudah ditempatkan!', 'error');
-                return;
-            }
-
+            if(availableTeams.length === 0) { showToast('Semua tim sudah ditempatkan!', 'error'); return; }
             let listHtml = '<ul style="list-style:none; padding:0;">';
             availableTeams.forEach(t => {
-                listHtml += `<li style="margin-bottom:10px;">
-                    <button class="btn btn-sm" style="width:100%; text-align:left;" onclick="placeTeamInSlot('${t.id}')">${t.school}</button>
-                </li>`;
+                listHtml += `<li style="margin-bottom:10px;"><button class="btn btn-sm" style="width:100%; text-align:left;" onclick="placeTeamInSlot('${t.id}')">${t.school}</button></li>`;
             });
             listHtml += '</ul>';
-
-            document.getElementById('modalSchoolName').innerText = "Pilih Tim untuk Dipindahkan";
+            document.getElementById('modalSchoolName').innerText = "Pilih Tim";
             document.getElementById('modalMemberList').innerHTML = listHtml;
             document.getElementById('memberModal').style.display = 'block';
         }
-
         function placeTeamInSlot(teamId) {
             const team = teamsData.find(t => t.id === teamId);
             if(!team || !moveTarget) return;
-
             currentBracketState[moveTarget.rIdx][moveTarget.mIdx][moveTarget.side] = team;
             closeModal();
             renderBracket();
-            showToast(`${team.school} ditempatkan`, 'success');
         }
 
-        // --- UTILS ---
         function showToast(msg, type='success') {
             const t = document.createElement('div');
             t.className = `toast ${type}`;
@@ -879,9 +778,7 @@
 
         window.onclick = function(event) {
             const modal = document.getElementById('memberModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+            if (event.target == modal) modal.style.display = "none";
         }
     </script>
 </body>
